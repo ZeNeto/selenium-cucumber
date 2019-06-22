@@ -3,7 +3,7 @@
 pipeline {
 
     stage('GitClone')
-    git clone https://github.com/ZeNeto/selenium-cucumber.git
+    sh 'git clone https://github.com/ZeNeto/selenium-cucumber.git'
 
     stage('Build') {
     sh 'mvn install -DskipTests'
