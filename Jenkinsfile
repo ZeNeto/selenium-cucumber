@@ -11,3 +11,4 @@ node {
     sh 'mvn sonar:sonar'
 
     }
+}
