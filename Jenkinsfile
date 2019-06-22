@@ -1,6 +1,4 @@
 #!/usr/bin/env groovy
-
-
 pipeline {
     agent any
 
@@ -37,18 +35,3 @@ pipeline {
             }
     }
 }
-
-# node {
-# 
-#     stage('Build') {
-#     sh 'mvn clean install'
-#
-#     }
-#
-#     stage('SonarQube') {
-#     sh 'mvn sonar:sonar'
-#
-#     }
-#
-#
-# }
