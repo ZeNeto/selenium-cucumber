@@ -1,0 +1,42 @@
+  jenkis:
+    image: jenkins/jenkins
+    hostname : jenkis-01
+    links:
+      - sonar
+    container_name: jenkins
+    restart: always
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+  # sonarqube:
+  #   image: sonarqube
+  #   container_name: sonar
+  #   ports:
+  #     - "9000:9000"
+  #   networks:
+  #      my_net:
+
+  db:
+    image: postgres:9.6.2
+    hostname: pgsql-01
+    container_name: pgsql
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=sonarqube
+      - POSTGRES_USER=sonarqube
+      - POSTGRES_PASSWORD=sonarqube
+
+  sonar:
+    image: sonarqube:6.3.1
+    hostname: sonar-01
+    container_name: sonar
+    links:
+      - db
+    ports:
+      - "9000:9000"
+      - "9092:9092"
+    environment:
+      - SONAR_JDBC_URL=jdbc:postgresql://pgsql-01:5432/sonarqube
+      - SONAR_JDBC_USERNAME=sonarqube
+      - SONAR_JDBC_PASSWORD=sonarqube
