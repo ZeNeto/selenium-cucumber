@@ -7,20 +7,12 @@ pipeline {
                 sh 'mvn sonar:sonar'
             }
         }
-        stage("Quality Gate 1") {
+        stage('build') {
             steps {
-                waitForQualityGate abortPipeline: true
+                sh 'mvn install -DskipTests'
             }
         }
-        stage('SonarQube analysis 2') {
-            steps {
-                sh 'gradle sonarqube'
+       
             }
         }
-        stage("Quality Gate 2") {
-            steps {
-                waitForQualityGate abortPipeline: true
-            }
-        }
-    }
-}
+ 
