@@ -16,11 +16,6 @@ pipeline {
 
             def container
 
-            ansiColor('xterm') {
-              stage('Clone repository') {
-                checkout scm
-                shortCommit = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-              }
 
               stage('Build image') {
                 container = docker.build('visibilityspots/jenkins-docker')
@@ -32,7 +27,7 @@ pipeline {
 
               stage('Push image') {
                 docker.withRegistry('http://172.17.0.2:8081/repository/task02/', 'nexus-credentials-id') {
-                  container.push("${shortCommit}")
+                  container.push("visibilityspots/jenkins-docker")
                   container.push('latest')
                 }
               }
