@@ -11,5 +11,13 @@ pipeline {
                 sh 'mvn install -DskipTests'
             }
         }
+
+        stage('CreateImage') {
+            steps {
+                sh 'docker build -f ./Dockerfile -t 172.17.0.2:8081/repository/task02/imagemtask02 .'
+            }
+        }
+
+        
 }
 }
