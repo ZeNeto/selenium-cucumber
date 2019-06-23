@@ -12,13 +12,8 @@ pipeline {
             }
         }
 
-
-
-            def container
-
-
               stage('Build image') {
-                container = docker.build('visibilityspots/jenkins-docker')
+                docker.build('visibilityspots/jenkins-docker')
               }
 
               stage('Test image') {
@@ -27,8 +22,8 @@ pipeline {
 
               stage('Push image') {
                 docker.withRegistry('http://172.17.0.2:8081/repository/task02/', 'nexus-credentials-id') {
-                  container.push("visibilityspots/jenkins-docker")
-                  container.push('latest')
+                      push("visibilityspots/jenkins-docker")
+                      push('latest')
                 }
               }
               }
