@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('SonarQube analysis 1') {
             steps {
-                sh 'mvn clean package sonar:sonar'
+                sh 'mvn sonar:sonar'
             }
         }
         stage("Quality Gate 1") {
