@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('SonarQube analysis) {
+        stage('SonarQube analysis') {
             steps {
                 sh 'mvn sonar:sonar'
             }
