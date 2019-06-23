@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('SonarQube analysis 1') {
+        stage('SonarQube analysis) {
             steps {
                 sh 'mvn sonar:sonar'
             }
@@ -14,10 +14,16 @@ pipeline {
 
         stage('CreateImage') {
             steps {
-                sh 'docker build -f ./Dockerfile -t 172.17.0.2:8081/repository/task02/imagemtask02 .'
+                sh 'docker build -f ./Dockerfile -t 172.17.0.2:8083/task02 .'
             }
         }
 
-        
+        stage('Send IMG') {
+            steps {
+                sh 'docker push 172.17.0.2:8083/task02:latest'
+            }
+        }
+
+
 }
 }
