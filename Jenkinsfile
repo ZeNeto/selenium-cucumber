@@ -12,7 +12,7 @@ pipeline {
             }
         }
 
-            }
+
 
             def container
 
@@ -31,4 +31,6 @@ pipeline {
                   container.push('latest')
                 }
               }
+              }
+              
             }
