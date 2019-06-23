@@ -1,18 +1,19 @@
-#!/usr/bin/env groovy
+node{
+   stage('SCM Checkout'){
+     git 'https://github.com/ZeNeto/selenium-cucumber'
+   }
+   stage('Compile-Package'){
+      // Get maven home path
+      def mvnHome =  tool name: 'maven-3', type: 'maven'
+      sh "${mvnHome}/bin/mvn package"
+   }
 
-pipeline {
-
-    stage('GitClone2'){
-    sh 'git clone https://github.com/ZeNeto/selenium-cucumber.git'
+   stage('SonarQube Analysis') {
+        def mvnHome =  tool name: 'maven-3', type: 'maven'
+        withSonarQubeEnv('sonarqube') {
+          sh "${mvnHome}/bin/mvn sonar:sonar"
+        }
     }
 
-    stage('Build') {
-    sh 'mvn install -DskipTests'
 
-    }
-
-    stage('SonarQube') {
-    sh 'mvn sonar:sonar'
-
-    }
 }
