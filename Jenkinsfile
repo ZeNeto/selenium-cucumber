@@ -1,13 +1,26 @@
 
-node {
-  stage('SCM') {
-    git 'https://github.com/ZeNeto/selenium-cucumber'
-  }
-  stage('SonarQube analysis') {
-    // requires SonarQube Scanner 2.8+
-    def scannerHome = tool 'SonarQube Scanner 2.8';
-    withSonarQubeEnv('My SonarQube Server') {
-      sh "${scannerHome}/bin/sonar-scanner"
+pipeline {
+    agent any
+    stages {
+        stage('SonarQube analysis 1') {
+            steps {
+                sh 'mvn clean package sonar:sonar'
+            }
+        }
+        stage("Quality Gate 1") {
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }
+        stage('SonarQube analysis 2') {
+            steps {
+                sh 'gradle sonarqube'
+            }
+        }
+        stage("Quality Gate 2") {
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }
     }
-  }
 }
