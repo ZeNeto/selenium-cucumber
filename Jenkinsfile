@@ -1,7 +1,7 @@
 node {
     checkout scm
 
-    docker.withRegistry('http://200.17.20.2:8083', 'nexusadmin') {
+    docker.withRegistry('https://200.17.20.2:8083', 'nexusadmin') {
 
         def customImage = docker.build("200.17.20.2:8083/task02")
 
