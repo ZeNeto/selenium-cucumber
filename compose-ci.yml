@@ -7,19 +7,15 @@ services:
       - sonar
     container_name: jenkins
     restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jenkins_home:/var/jenkins_home
     ports:
       - "8080:8080"
       - "50000:50000"
     networks:
       nettas02:
         ipv4_address: 200.17.20.5
-  # sonarqube:
-  #   image: sonarqube
-  #   container_name: sonar
-  #   ports:
-  #     - "9000:9000"
-  #   networks:
-  #      my_net:
 
   db:
     image: postgres:9.6.2
@@ -69,12 +65,3 @@ networks:
      config:
        - subnet: 200.17.20.0/16
          gateway: 200.17.20.1
-
-# networks:
-#     app_net::
-#       driver: bridge
-#       ipam:
-#           driver: default
-#           config:
-#            - subnet: 172.17.0.0/24
-#              gateway: 172.17.0.1
