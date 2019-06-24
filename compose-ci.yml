@@ -2,14 +2,16 @@ version: "2"
 services:
   jenkis:
     image: jenkins/jenkins
-    hostname : jenkis-01
+    hostname: jenkis-01
+    # command: sh -c "curl -fsSLO https://download.docker.com/linux/static/edge/x86_64/docker-17.04.0-ce.tgz && tar xzvf docker-17.04.0-ce.tgz && mv docker/docker /usr/local/bin && rm -r docker docker-17.04.0-ce.tgz"
+    # wget http://mirror.nbtelecom.com.br/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.zip && unzip apache-maven-3.6.1-bin.zip && mv apache-maven-3.6.1 /opt && ln -s /opt/apache-maven-3.6.1/bin/mvn /usr/bin/
     links:
       - sonar
     container_name: jenkins
     restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - jenkins_home:/var/jenkins_home
+    # volumes:
+    #   - /var/run/docker.sock:/var/run/docker.sock
+    #   - jenkins_home:/var/jenkins_home
     ports:
       - "8080:8080"
       - "50000:50000"
@@ -65,3 +67,5 @@ networks:
      config:
        - subnet: 200.17.20.0/16
          gateway: 200.17.20.1
+# volumes:
+#     jenkins_home:

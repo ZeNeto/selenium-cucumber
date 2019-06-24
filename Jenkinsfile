@@ -15,7 +15,7 @@ pipeline {
 
         stage('CreateImage') {
             steps {
-                sh 'docker build -f ./Dockerfile -t 200.17.20.2:8083/task02 .'
+                sh 'docker build . -t 200.17.20.2:8083/task02'
             }
         }
 
