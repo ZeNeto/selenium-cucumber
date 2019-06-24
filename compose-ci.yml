@@ -1,3 +1,5 @@
+version: "2"
+services:
   jenkis:
     image: jenkins/jenkins
     hostname : jenkis-01
@@ -8,6 +10,9 @@
     ports:
       - "8080:8080"
       - "50000:50000"
+    networks:
+      nettas02:
+        ipv4_address: 200.17.20.5
   # sonarqube:
   #   image: sonarqube
   #   container_name: sonar
@@ -26,6 +31,9 @@
       - POSTGRES_DB=sonarqube
       - POSTGRES_USER=sonarqube
       - POSTGRES_PASSWORD=sonarqube
+    networks:
+      nettas02:
+        ipv4_address: 200.17.20.3
 
   sonar:
     image: sonarqube:6.3.1
@@ -40,6 +48,9 @@
       - SONAR_JDBC_URL=jdbc:postgresql://pgsql-01:5432/sonarqube
       - SONAR_JDBC_USERNAME=sonarqube
       - SONAR_JDBC_PASSWORD=sonarqube
+    networks:
+       nettas02:
+        ipv4_address: 200.17.20.4
 
   nexus:
     image: sonatype/nexus3
@@ -47,3 +58,23 @@
     container_name: nexus
     ports:
       - "8081:8081"
+    networks:
+      nettas02:
+        ipv4_address: 200.17.20.2
+
+networks:
+  nettas02:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 200.17.20.0/16
+         gateway: 200.17.20.1
+
+# networks:
+#     app_net::
+#       driver: bridge
+#       ipam:
+#           driver: default
+#           config:
+#            - subnet: 172.17.0.0/24
+#              gateway: 172.17.0.1

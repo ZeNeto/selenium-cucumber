@@ -1,6 +1,12 @@
 pipeline {
     agent any
     stages {
+
+          stage('Initialize'){
+             def dockerHome = tool 'myDocker'
+             env.PATH = "${dockerHome}/bin:${env.PATH}"
+         }
+
         stage('SonarQube analysis') {
             steps {
                 sh 'mvn sonar:sonar'
@@ -14,13 +20,13 @@ pipeline {
 
         stage('CreateImage') {
             steps {
-                sh 'docker build -f ./Dockerfile -t 172.17.0.2:8083/task02 .'
+                sh 'docker build -f ./Dockerfile -t 200.17.20.2:8083/task02 .'
             }
         }
 
         stage('Send IMG') {
             steps {
-                sh 'docker push 172.17.0.2:8083/task02:latest'
+                sh 'docker push 200.17.20.2:8083/task02:latest'
             }
         }
 
