@@ -1,7 +1,7 @@
 version: "2"
 services:
   jenkis:
-    image: jenkins/jenkins
+    image: pc0077/jenkins:lasted
     hostname: jenkis-01
     # command: sh -c "curl -fsSLO https://download.docker.com/linux/static/edge/x86_64/docker-17.04.0-ce.tgz && tar xzvf docker-17.04.0-ce.tgz && mv docker/docker /usr/local/bin && rm -r docker docker-17.04.0-ce.tgz"
     # wget http://mirror.nbtelecom.com.br/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.zip && unzip apache-maven-3.6.1-bin.zip && mv apache-maven-3.6.1 /opt && ln -s /opt/apache-maven-3.6.1/bin/mvn /usr/bin/
@@ -33,7 +33,7 @@ services:
         ipv4_address: 200.17.20.3
 
   sonar:
-    image: sonarqube:6.3.1
+    image: pc0077/sonarqube:lasted
     hostname: sonar-01
     container_name: sonar
     links:
@@ -50,7 +50,7 @@ services:
         ipv4_address: 200.17.20.4
 
   nexus:
-    image: sonatype/nexus3
+    image: pc0077/nexus3:lasted
     hostname: nexus3
     container_name: nexus
     ports:

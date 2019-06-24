@@ -164,7 +164,7 @@
 		<pluginManagement>
 		    <plugins>
 
-          <plugin>
+          <!-- <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-surefire-plugin</artifactId>
       <version>3.0.0-M3</version>
@@ -173,22 +173,22 @@
           <include>Sample.java</include>
         </includes>
       </configuration>
-    </plugin>
-          <!-- <plugin>
+    </plugin> -->
+          <plugin>
        <groupId>org.apache.maven.plugins</groupId>
        <artifactId>maven-surefire-plugin</artifactId>
        <version>3.0.0-M3</version>
-   </plugin> -->
+   </plugin>
 
 		    <!-- Maven Surefire Plugin -->
-		      <!-- <plugin>
+		      <plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${maven-surefire-plugin.version}</version>
 					<configuration>
 					 	<encoding>UTF-8</encoding>
 					</configuration>
-			</plugin> -->
+			</plugin>
 
 			<!-- Maven Compiler Plugin -->
 			<plugin>
