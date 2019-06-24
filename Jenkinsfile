@@ -1,17 +1,11 @@
-node("docker") {
-    docker.withRegistry('200.17.20.2:8083', 'admin') {
+node {
+    checkout scm
 
-        git url: "https://github.com/ZeNeto/selenium-cucumber", credentialsId: 'joseneto0077@gmail.com'
+    docker.withRegistry('http://200.17.20.2:8083', 'admin123-admin') {
 
-        sh "git rev-parse HEAD > .git/commit-id"
-        def commit_id = readFile('.git/commit-id').trim()
-        println commit_id
+        def customImage = docker.build("200.17.20.2:8083/task02")
 
-        stage "build"
-        def app = docker.build "task02"
-
-        stage "publish"
-        app.push 'master'
-        app.push "${commit_id}"
+        /* Push the container to the custom Registry */
+        customImage.push()
     }
 }
